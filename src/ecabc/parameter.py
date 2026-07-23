@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 #  ecabc/parameter.py
 #  v.3.0.0
@@ -14,14 +13,17 @@
 
 # Stdlib. imports
 from random import uniform
-from typing import Union
 
 
 class Parameter:
-
-    def __init__(self, min_val: Union[int, float], max_val: Union[int, float],
-                 restrict: bool = True, name: str = None):
-        ''' Parameter object: houses information about a user-supplied
+    def __init__(
+        self,
+        min_val: int | float,
+        max_val: int | float,
+        restrict: bool = True,
+        name: str | None = None,
+    ):
+        """Parameter object: houses information about a user-supplied
         parameter including data type, minimum/maximum initialization values,
         and whether the parameter is limited to [min_val, max_val] when
         mutating
@@ -34,18 +36,17 @@ class Parameter:
             restrict (bool): if `True`, parameter mutations must be within
                 [min_val, max_val]
             name (str): name of parameter, optional
-        '''
+        """
 
-        if type(min_val) != type(max_val):
-            raise ValueError('Supplied min_val is not the same type is '
-                             'supplied max_val: {}, {}'.format(
-                                 type(min_val), type(max_val)
-                             ))
+        if type(min_val) is not type(max_val):
+            raise ValueError(
+                "Supplied min_val is not the same type is "
+                f"supplied max_val: {type(min_val)}, {type(max_val)}"
+            )
 
         self._dtype = type(min_val + max_val)
         if self._dtype not in [int, float]:
-            raise ValueError('Unsupported data type for Parameter: use {}'
-                             .format([int, float]))
+            raise ValueError(f"Unsupported data type for Parameter: use {[int, float]}")
 
         self._min_val = min_val
         self._max_val = max_val
@@ -53,18 +54,19 @@ class Parameter:
         self._name = name
 
     @property
-    def rand_val(self) -> Union[int, float]:
-        ''' Returns a random value X in range [min_val, max_val] using the
+    def rand_val(self) -> int | float:
+        """Returns a random value X in range [min_val, max_val] using the
         equation:
 
         X = min_val + rand(0, 1) * (max_val - min_val)
-        '''
+        """
 
-        return self._dtype(self._min_val + uniform(0, 1) *
-                           (self._max_val - self._min_val))
+        return self._dtype(
+            self._min_val + uniform(0, 1) * (self._max_val - self._min_val)
+        )
 
-    def mutate(self, curr_value: Union[int, float]) -> Union[int, float]:
-        ''' Parameter.mutate: mutates current parameter value by using the
+    def mutate(self, curr_value: int | float) -> int | float:
+        """Parameter.mutate: mutates current parameter value by using the
         equation:
 
         V = X + rand(-1, 1) * (X - Xrand)
@@ -77,7 +79,7 @@ class Parameter:
 
         Returns:
             int, float: mutated parameter value
-        '''
+        """
 
         new_value = self._dtype(
             curr_value + uniform(-1, 1) * (curr_value - self.rand_val)

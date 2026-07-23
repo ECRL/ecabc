@@ -1,0 +1,49 @@
+cff-version: 1.2.0
+message: If you use ECabc, please cite the JOSS paper and this software.
+title: "ECabc: A feature tuning program focused on Artificial Neural Network hyperparameters"
+type: software
+authors:
+  - family-names: Sharma
+    given-names: Sanskriti
+    orcid: https://orcid.org/0000-0002-9884-7351
+  - family-names: Gelaf-Romer
+    given-names: Hernan
+    orcid: https://orcid.org/0000-0003-0690-576X
+  - family-names: Kessler
+    given-names: Travis
+    orcid: https://orcid.org/0000-0002-7363-4050
+    email: travis.j.kessler@gmail.com
+  - family-names: Mack
+    given-names: John Hunter
+    orcid: https://orcid.org/0000-0002-5455-8611
+version: 3.0.2
+license: MIT
+repository-code: https://github.com/ecrl/ecabc
+url: https://pypi.org/project/ecabc/
+abstract: >-
+  ECabc is an open-source Python package that tunes parameters of user-supplied
+  objective functions using the Artificial Bee Colony (ABC) algorithm.
+keywords:
+  - artificial bee colony
+  - hyperparameter optimization
+  - optimization
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Sharma
+      given-names: Sanskriti
+      orcid: https://orcid.org/0000-0002-9884-7351
+    - family-names: Gelaf-Romer
+      given-names: Hernan
+      orcid: https://orcid.org/0000-0003-0690-576X
+    - family-names: Kessler
+      given-names: Travis
+      orcid: https://orcid.org/0000-0002-7363-4050
+    - family-names: Mack
+      given-names: John Hunter
+      orcid: https://orcid.org/0000-0002-5455-8611
+  title: "ECabc: A feature tuning program focused on Artificial Neural Network hyperparameters"
+  journal: Journal of Open Source Software
+  year: 2019
+  doi: 10.21105/joss.01420
+  url: https://doi.org/10.21105/joss.01420

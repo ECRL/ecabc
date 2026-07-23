@@ -24,12 +24,10 @@ def test_apply_mutation():
 
 def test_call_obj_fn():
     param_vals = [2, 2, 2]
-    ret_params, result = abc_utils.call_obj_fn(
-        param_vals, _objective_function, {}
-    )
+    ret_params, result = abc_utils.call_obj_fn(param_vals, _objective_function, {})
     assert result == 6
     assert ret_params == param_vals
-    fn_args = {'my_kwarg': 2}
+    fn_args = {"my_kwarg": 2}
     ret_params, result = abc_utils.call_obj_fn(
         param_vals, _objective_function_kwargs, fn_args
     )
@@ -38,7 +36,6 @@ def test_call_obj_fn():
 
 
 def test_choose_bee():
-
     bee_1 = Bee([0], 100000000000000000000, 0)
     bee_2 = Bee([0], 0, 0)
     chosen_bee = abc_utils.choose_bee([bee_1, bee_2])
@@ -46,7 +43,6 @@ def test_choose_bee():
 
 
 def test_determine_best_bee():
-
     bee_1 = Bee([10], 10, 0)
     bee_2 = Bee([0], 0, 0)
     bee_2_fitness = bee_2._fitness_score
@@ -66,7 +62,7 @@ def test_param_init():
     assert param._restrict is False
     param = Parameter(0, 10)
     assert param._restrict is True
-    assert param._dtype == int
+    assert param._dtype is int
     assert param._min_val == 0
     assert param._max_val == 10
 
@@ -77,10 +73,10 @@ def test_rand_val():
         rand_val = param.rand_val
         assert rand_val >= 0
         assert rand_val <= 10
-        assert type(rand_val) == int
+        assert isinstance(rand_val, int)
     param = Parameter(0.0, 10.0)
     rand_val = param.rand_val
-    assert type(rand_val) == float
+    assert isinstance(rand_val, float)
 
 
 def test_mutate():
@@ -89,7 +85,7 @@ def test_mutate():
     for _ in range(1000):
         mutation = param.mutate(rand_val)
         if mutation < 0 or mutation > 10:
-            raise ValueError('Mutation outside min/max bounds')
+            raise ValueError("Mutation outside min/max bounds")
     param = Parameter(0, 3, False)
     rand_val = param.rand_val
     outside_bounds = False
@@ -109,7 +105,7 @@ def test_colony_init():
     c = ABC(10, _objective_function)
     assert c._num_employers == 10
     assert c._obj_fn == _objective_function
-    kwargs = {'my_kwarg': 2}
+    kwargs = {"my_kwarg": 2}
     c = ABC(10, _objective_function_kwargs, kwargs)
     assert c._obj_fn_args == kwargs
     c = ABC(10, _objective_function, num_processes=8)
@@ -141,9 +137,9 @@ def test_add_parameter():
     assert c._params[1]._max_val == 3
     assert c._params[2]._min_val == 4
     assert c._params[2]._max_val == 5
-    assert c._params[0]._dtype == int
+    assert c._params[0]._dtype is int
     c.add_param(0.0, 1.0)
-    assert c._params[3]._dtype == float
+    assert c._params[3]._dtype is float
     assert c._params[0]._restrict is True
     c.add_param(0, 1, False)
     assert c._params[4]._restrict is False
@@ -166,11 +162,11 @@ def test_search_and_stats():
         c.search()
     assert c.best_fitness == 1
     assert c.best_ret_val == 0
-    assert c.best_params == {'P0': 0, 'P1': 0}
+    assert c.best_params == {"P0": 0, "P1": 0}
 
 
 def test_kwargs():
-    c = ABC(10, _objective_function_kwargs, {'my_kwarg': 2})
+    c = ABC(10, _objective_function_kwargs, {"my_kwarg": 2})
     c.add_param(0, 0)
     c.add_param(0, 0)
     c.initialize()
@@ -190,12 +186,12 @@ def test_multiprocessing():
 
 def test_custom_param_name():
     c = ABC(20, _objective_function)
-    c.add_param(0, 10, name='int1')
-    c.add_param(0, 10, name='int2')
+    c.add_param(0, 10, name="int1")
+    c.add_param(0, 10, name="int2")
     c.initialize()
     for _ in range(50):
         c.search()
-    assert c.best_params == {'int1': 0, 'int2': 0}
+    assert c.best_params == {"int1": 0, "int2": 0}
 
 
 # bee.py

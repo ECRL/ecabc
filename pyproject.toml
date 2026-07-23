@@ -3,11 +3,12 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
+where = ["src"]
 exclude = ["paper*"]
 
 [project]
 name = "ecabc"
-version = "3.0.1"
+version = "3.0.2"
 authors = [
     { name="Sanskriti Sharma", email="Sanskriti_Sharma@student.uml.edu" },
     { name="Hernan Gelaf-Romer", email="Hernan_Gelafromer@student.uml.edu" },
@@ -15,9 +16,13 @@ authors = [
 ]
 description = "Artificial bee colony for function parameter optimization"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
+license = { text = "MIT" }
 classifiers = [
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
@@ -25,3 +30,42 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/ecrl/ecabc"
 "Bug Tracker" = "https://github.com/ecrl/ecabc/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+    "ruff>=0.8",
+    "mypy>=1.8",
+    "pre-commit>=4",
+    "build>=1.2",
+]
+docs = [
+    "sphinx>=7",
+    "furo>=2024.1",
+    "sphinx-autodoc-typehints>=2",
+    "sphinx-copybutton>=0.5",
+]
+
+[tool.ruff]
+line-length = 88
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=ecabc --cov-report=term-missing --cov-fail-under=95"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["ecabc"]
+branch = false
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src/ecabc"]
+warn_return_any = true
+warn_unused_configs = true
+check_untyped_defs = true
+disallow_untyped_defs = false

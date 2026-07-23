@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 #  ecabc/bee.py
 #  v.3.0.0
@@ -13,14 +12,17 @@
 #
 
 # Stdlib. imports
-from typing import Union
 
 
 class Bee:
-
-    def __init__(self, params: list, obj_fn_val: Union[int, float],
-                 stay_limit: int, is_employer: bool = False):
-        ''' Bee object: houses bee-specific information such as its current
+    def __init__(
+        self,
+        params: list,
+        obj_fn_val: int | float,
+        stay_limit: int,
+        is_employer: bool = False,
+    ):
+        """Bee object: houses bee-specific information such as its current
         set of parameters, the objective function value resulting from its,
         current parameters, maximum number of cycles it can stay at its
         current food source, and whether it is an employer bee or not
@@ -32,7 +34,7 @@ class Bee:
             stay_limit (int): maximum number of cycles the bee can stay at its
                 current food source
             is_employer (bool): `True` if employer, `False` if onlooker
-        '''
+        """
 
         self._params = params
         self._obj_fn_val = obj_fn_val
@@ -43,9 +45,9 @@ class Bee:
 
     @property
     def abandon(self) -> bool:
-        ''' When called, increment how many times the bee has stayed at its
+        """When called, increment how many times the bee has stayed at its
         current food source; if reached stay limit, return `True` else `False`
-        '''
+        """
 
         self._stay_count += 1
         if self._stay_count >= self._stay_limit:
@@ -54,8 +56,8 @@ class Bee:
             return False
 
     @staticmethod
-    def calc_fitness(obj_fn_val: Union[int, float]) -> float:
-        ''' Static method: Bee.calc_fitness: Calculates fitness score based on
+    def calc_fitness(obj_fn_val: int | float) -> float:
+        """Static method: Bee.calc_fitness: Calculates fitness score based on
         objective function value, using the equation:
 
         fitness = 1 / (1 + ofv)     if ofv >= 0
@@ -69,15 +71,15 @@ class Bee:
 
         Returns:
             float: resulting fitness score
-        '''
+        """
 
         if obj_fn_val >= 0:
             return 1 / (obj_fn_val + 1)
         else:
             return 1 + abs(obj_fn_val)
 
-    def is_better_food(self, obj_fn_val: Union[int, float]) -> bool:
-        ''' Bee.is_better_food: determines if objective function value
+    def is_better_food(self, obj_fn_val: int | float) -> bool:
+        """Bee.is_better_food: determines if objective function value
         resulting from a new food source is better than the bee's current food
         source
 
@@ -87,7 +89,7 @@ class Bee:
 
         Returns:
             bool: `True` if better food source else `False`
-        '''
+        """
 
         if self.calc_fitness(obj_fn_val) > self._fitness_score:
             return True

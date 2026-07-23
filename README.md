@@ -1,9 +1,10 @@
 [![UML Energy & Combustion Research Laboratory](https://sites.uml.edu/hunter-mack/files/2021/11/ECRL_final.png)](http://faculty.uml.edu/Hunter_Mack/)
 
-# ECabc: optimization algorithm for tuning user-defined parametric functions 
+# ECabc: optimization algorithm for tuning user-defined parametric functions
 [![GitHub version](https://badge.fury.io/gh/ECRL%2FECabc.svg)](https://badge.fury.io/gh/ECRL%2FECabc)
 [![PyPI version](https://badge.fury.io/py/ecabc.svg)](https://badge.fury.io/py/ecabc)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ECRL/ecabc/blob/master/LICENSE)
+[![CI](https://github.com/ecrl/ecabc/actions/workflows/run_tests.yml/badge.svg?branch=master)](https://github.com/ecrl/ecabc/actions/workflows/run_tests.yml)
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.01420/status.svg)](https://doi.org/10.21105/joss.01420)
 
 **ECabc** is an open source Python package used to tune parameters for user-supplied functions based on the [Artificial Bee Colony by D. Karaboğa](http://scholarpedia.org/article/Artificial_bee_colony_algorithm). ECabc optimizes user supplied functions, or **fitness function**s, using a set of variables that exist within a search space. The bee colony consists of three types of bees: employers, onlookers and scouts. An **employer bee** exploits a solution comprised of a permutation of the variables in the search space, and evaluates the viability of the solution. An **onlooker bee** chooses an employer bee with an optimal solution and searches for new solutions near them. The **scout bee**, a variant of the employer bee, will search for a new solution if it has stayed too long at its current solution.
@@ -17,37 +18,34 @@ While it has several applications, ECabc has been successfully used by the Energ
 
 # Installation
 
-### Prerequisites:
-- Have python 3.X installed
-- Have the ability to install python packages
+**Requires Python 3.10 or newer.** ECabc has no runtime third-party dependencies
+(stdlib only). A virtual environment is recommended.
 
 ### Method 1: pip
-If you are working in a Linux/Mac environment:
-```
-sudo pip install ecabc
-```
 
-Alternatively, in a Windows or virtualenv environment:
 ```
 pip install ecabc
 ```
 
-To update your version of ECabc to the latest release version, use
+To upgrade to the latest release:
+
 ```
 pip install --upgrade ecabc
 ```
 
-Note: if multiple Python releases are installed on your system (e.g. 2.7 and 3.7), you may need to execute the correct version of pip. For Python 3.X, change **"pip install ecabc"** to **"pip3 install ecabc"**.
-
 ### Method 2: From source
-- Download the ECabc repository, navigate to the download location on the command line/terminal, and execute:
+
+Clone or download this repository, then from the repository root:
+
 ```
 pip install .
 ```
 
-There are currently no additional dependencies for ECabc.
-
 # Usage
+
+API stability for the public surface is documented in
+[API_STABILITY.md](API_STABILITY.md) (also the Sphinx *API stability policy*
+page under `docs/source/stability.rst`).
 
 To start using ECabc, you need a couple items:
 - a fitness function (cost function) to optimize

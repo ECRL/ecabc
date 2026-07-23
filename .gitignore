@@ -1,0 +1,46 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+.venv*/
+venv/
+ENV/
+
+# Test / coverage / type / lint caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+
+# Build / packaging
+build/
+dist/
+*.whl
+.tox/
+docs/_build/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Local agent tooling (maintainer-only; not part of published package)
+AGENTS.md
+CLAUDE.md
+.github/copilot-instructions.md
+.cursor/rules/_dev.mdc
+.cursor/rules/*.mdc
+.cursor/dev-toolkit.yaml
+docs/blueprint/BLUEPRINT.md

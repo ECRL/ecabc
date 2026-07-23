@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 #  ecabc/utils.py
 #  v.3.0.0
@@ -12,13 +11,21 @@
 #  colony
 #
 
-# Stdlib. imports
+from __future__ import annotations
+
 from bisect import bisect
+
+# Stdlib. imports
+from collections.abc import Callable
 from random import randint, random
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ecabc.bee import Bee
 
 
 def apply_mutation(curr_params: list, all_params: list) -> list:
-    ''' apply_mutation: alters the value of one parameter in supplied list of
+    """apply_mutation: alters the value of one parameter in supplied list of
     values
 
     Args:
@@ -27,7 +34,7 @@ def apply_mutation(curr_params: list, all_params: list) -> list:
 
     Returns:
         list: parameter values with one value mutation
-    '''
+    """
 
     to_change = randint(0, len(curr_params) - 1)
     new_params = curr_params[:]
@@ -35,8 +42,8 @@ def apply_mutation(curr_params: list, all_params: list) -> list:
     return new_params
 
 
-def call_obj_fn(params: list, obj_fn: callable, obj_fn_args: dict) -> tuple:
-    ''' call_obj_fn: calls supplied objective function, evaluating using
+def call_obj_fn(params: list, obj_fn: Callable[..., float], obj_fn_args: dict) -> tuple:
+    """call_obj_fn: calls supplied objective function, evaluating using
     supplied parameters; callable in single- and multi-processed configurations
 
     Args:
@@ -48,13 +55,13 @@ def call_obj_fn(params: list, obj_fn: callable, obj_fn_args: dict) -> tuple:
 
     Returns:
         tuple: (params, objective function return value)
-    '''
+    """
 
     return (params, obj_fn(params, **obj_fn_args))
 
 
-def choose_bee(bees: list) -> 'Bee':
-    ''' choose_bee: choose a bee based on probabilities a given bee will be
+def choose_bee(bees: list[Bee]) -> Bee:
+    """choose_bee: choose a bee based on probabilities a given bee will be
     chosen; probabilities based on fitness score (higher fitness score ==
     higher probability of being chosen)
 
@@ -63,12 +70,12 @@ def choose_bee(bees: list) -> 'Bee':
 
     Returns:
         Bee: chosen Bee
-    '''
+    """
 
     fitness_sum = sum(b._fitness_score for b in bees)
     probabilities = [b._fitness_score / fitness_sum for b in bees]
-    cdf_vals = []
-    cumsum = 0
+    cdf_vals: list[float] = []
+    cumsum = 0.0
     for p in probabilities:
         cumsum += p
         cdf_vals.append(cumsum)
@@ -76,8 +83,10 @@ def choose_bee(bees: list) -> 'Bee':
     return bees[idx]
 
 
-def determine_best_bee(bees: list) -> tuple:
-    ''' determine_best_bee: return highest fitness score w/ corresponding
+def determine_best_bee(
+    bees: list[Bee],
+) -> tuple[float, int | float | None, list | None]:
+    """determine_best_bee: return highest fitness score w/ corresponding
     objective function return value and parameters given a list of bees
 
     Args:
@@ -85,11 +94,11 @@ def determine_best_bee(bees: list) -> tuple:
 
     Returns:
         tuple: (best fitness score, best return value, best parameters)
-    '''
+    """
 
-    best_fitness = 0
-    best_ret_val = None
-    best_params = None
+    best_fitness: float = 0
+    best_ret_val: int | float | None = None
+    best_params: list | None = None
     for bee in bees:
         if bee._fitness_score > best_fitness:
             best_fitness = bee._fitness_score

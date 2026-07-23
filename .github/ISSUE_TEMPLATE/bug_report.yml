@@ -1,0 +1,51 @@
+name: Bug report
+description: Report incorrect behavior in ECabc
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. Please include a minimal reproducible example.
+        Security issues should go through [SECURITY.md](https://github.com/ecrl/ecabc/blob/master/SECURITY.md), not public issues.
+  - type: input
+    id: version
+    attributes:
+      label: ECabc version
+      description: Output of `python -c "import ecabc; print(ecabc.__version__)"`
+      placeholder: "3.0.2"
+    validations:
+      required: true
+  - type: input
+    id: python-version
+    attributes:
+      label: Python version
+      placeholder: "3.12"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "macOS 15 / Ubuntu 22.04 / Windows 11"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Expected vs actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal example
+      description: Short script that reproduces the issue
+      render: python
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error output (if any)
+      render: shell

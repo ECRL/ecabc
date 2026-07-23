@@ -1,0 +1,39 @@
+name: Feature request
+description: Suggest an enhancement for ECabc
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please read [API_STABILITY.md](https://github.com/ecrl/ecabc/blob/master/API_STABILITY.md).
+        Changes that break the frozen public API need an explicit versioning plan.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+      description: What problem does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Desired API or behavior (sketch is fine)
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Workarounds or other approaches
+    validations:
+      required: false
+  - type: checkboxes
+    id: api-impact
+    attributes:
+      label: API impact
+      options:
+        - label: This request can be met with additive, backward-compatible changes
+          required: false
+        - label: This may require a major-version / migration plan
+          required: false
