@@ -488,5 +488,5 @@ flowchart LR
 - [x] Execute Phase 0 first (contract suite / signature locks)
 - [x] No implementation of Phases 2–4 until Phase 0 oracles exist (recommended gate)
 - [x] Phase 1 bug fix merges only with its regression test
-- [ ] All Phases 0–4 work done and verified locally before release push (§11.6)
-- [ ] Tag `3.0.2` only when Phases 0–3 exit criteria pass and Phase 4 release checklist is complete
+- [x] All Phases 0–4 work done and verified locally before release push (§11.6)
+- [x] Tag `3.0.2` only when Phases 0–3 exit criteria pass and Phase 4 release checklist is complete
